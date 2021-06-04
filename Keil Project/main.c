@@ -30,6 +30,7 @@ void pinA3_Low_output(void);
 void light_led_after_100m(void);
 void red_led_output(void);
 double calculate_distance(double pre_lati, double pre_longi,double lati, double longi);
+void update_dist_travelled(void);
 //--------------------------------------------------------------------------
                         // Main Function
 int main(){
@@ -137,6 +138,13 @@ void update_7_segment(void){
         	}
         	old_dist = dist_travelled;
     	}
+}
+//Update Distance
+void update_dist_travelled(void){
+    dist_travelled = dist_travelled + 0.2;
+    if (dist_travelled > 150){
+        dist_travelled = 150;
+    }
 }
 //System Clock
 void Systick_init(void){
