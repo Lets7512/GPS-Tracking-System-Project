@@ -17,6 +17,8 @@ void portE(void);
 void portD(void);
 void portC(void);
 void portB(void);
+void portA(void);
+//---------------------------------------------------------------------------
 void Systick_init(void);
 
 void update_7_segment(void);
@@ -101,6 +103,18 @@ void portB(void){
         GPIO_PORTB_DATA_R = 0x00;
 }
 
+//PortA Intialize
+void portA(void){
+        SYSCTL_RCGCGPIO_R |= 0x01;
+        while((SYSCTL_PRGPIO_R & 0x01) == 0){}
+        GPIO_PORTA_DEN_R = 0xEC; //A5 , A6 , A7 , A3,A2
+        GPIO_PORTA_DIR_R = 0xEC;
+        GPIO_PORTA_AFSEL_R = 0x00;
+        GPIO_PORTA_AMSEL_R = 0x00;
+        GPIO_PORTA_PCTL_R = 0x00000000;
+        GPIO_PORTA_DATA_R = 0x00;
+}
+
 //Update 7 Segment Readings
 void update_7_segment(void){   
 	int count = (int)dist_travelled - (int)old_dist;
@@ -112,6 +126,8 @@ void update_7_segment(void){
         	old_dist = dist_travelled;
     	}
 }
+
+//Send distance to 7 segments
 void send_dist_to_segment(void){
     GPIO_PORTA_DATA_R |= 0x04; // Pin A2
     delay_ms(10);
