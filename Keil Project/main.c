@@ -16,6 +16,7 @@ void portF(void);
 void portE(void);
 void portD(void);
 void portC(void);
+void portB(void);
 void Systick_init(void);
 
 void update_7_segment(void);
@@ -86,6 +87,18 @@ void portC(void){
         GPIO_PORTC_AMSEL_R = 0x00;
         GPIO_PORTC_PCTL_R = 0x00000000;
         GPIO_PORTC_DATA_R = 0x00;
+}
+
+//PortB Intialize
+void portB(void){
+        SYSCTL_RCGCGPIO_R |= 0x02;
+        while((SYSCTL_PRGPIO_R & 0x02) == 0){}
+        GPIO_PORTB_DEN_R = 0xFF; //for LCD
+        GPIO_PORTB_DIR_R = 0xFF;
+        GPIO_PORTB_AFSEL_R = 0x00;
+        GPIO_PORTB_AMSEL_R = 0x00;
+        GPIO_PORTB_PCTL_R = 0x00000000;
+        GPIO_PORTB_DATA_R = 0x00;
 }
 
 //Update 7 Segment Readings
