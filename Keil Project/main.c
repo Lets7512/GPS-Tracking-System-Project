@@ -19,6 +19,7 @@ void update_7_segment(void);
 void send_dist_to_segment(void);
 void pinA3_High_output(void);
 void pinA3_Low_output(void);
+void light_led_after_100m(void);
 
 //--------------------------------------------------------------------------
                         // Main Function
@@ -79,4 +80,11 @@ void Systick_init(void){
 				//NVIC_ST_RELOAD_R = 16;  // for us delay
         NVIC_ST_CTRL_R = 5;
         NVIC_ST_CURRENT_R = 0;
+}
+
+//Turn on LED after 100m
+void light_led_after_100m(void){
+    if(dist_travelled >= 100){
+        red_led_output(); //led red o/p function
+    }
 }
