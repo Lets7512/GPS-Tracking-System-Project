@@ -29,7 +29,7 @@ void pinA3_High_output(void);
 void pinA3_Low_output(void);
 void light_led_after_100m(void);
 void red_led_output(void);
-
+double calculate_distance(double pre_lati, double pre_longi,double lati, double longi);
 //--------------------------------------------------------------------------
                         // Main Function
 int main(){
@@ -115,6 +115,16 @@ void portA(void){
         GPIO_PORTA_AMSEL_R = 0x00;
         GPIO_PORTA_PCTL_R = 0x00000000;
         GPIO_PORTA_DATA_R = 0x00;
+}
+//Distance calculate function
+double calculate_distance(double pre_lati, double pre_longi,double lati, double longi){
+        double delta_lati = lati - pre_lati;
+        double delta_longi = longi - pre_longi;
+        double R = 6371000; // radias in meters to get the result in meters
+        double a = pow(sin(delta_lati/2),2) + cos(pre_lati) * cos(lati) * pow(sin(delta_longi/2),2) ;
+        double c = 2 * atan2(sqrt(a), sqrt(1-a));
+        double d = R * c;
+        return d;
 }
 
 //Update 7 Segment Readings
