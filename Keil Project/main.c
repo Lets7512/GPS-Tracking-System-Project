@@ -118,6 +118,9 @@ void portA(void){
         GPIO_PORTA_PCTL_R = 0x00000000;
         GPIO_PORTA_DATA_R = 0x00;
 }
+
+//Distance calculate function this function is called haversine function 
+// the error is up to 0.5% because it consider the earth as perfect sphere 
 double calculate_distance(double pre_lati, double pre_longi,double lati, double longi){
         pre_lati = pre_lati*PI/180;
         pre_longi = pre_longi*PI/180;
