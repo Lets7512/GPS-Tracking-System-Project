@@ -15,7 +15,6 @@ char dist_buffer[16];
 void Systick_init(void);
 
 void update_7_segment(void);
-void send_dist_to_segment(void);
 
 //--------------------------------------------------------------------------
                         // Main Function
@@ -39,12 +38,6 @@ void update_7_segment(void){
         	old_dist = dist_travelled;
     	}
 }
-void send_dist_to_segment(void){
-    GPIO_PORTA_DATA_R |= 0x04; // Pin A2
-    delay_ms(10);
-    GPIO_PORTA_DATA_R &=~0x04;
-}
-
 //System Clock
 void Systick_init(void){
         NVIC_ST_RELOAD_R = (int)(15999999/1000000);  // for us delay
