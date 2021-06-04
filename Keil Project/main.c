@@ -17,6 +17,7 @@ void Systick_init(void);
 void update_7_segment(void);
 void send_dist_to_segment(void);
 void pinA3_High_output(void);
+void pinA3_Low_output(void);
 
 //--------------------------------------------------------------------------
                         // Main Function
@@ -49,6 +50,11 @@ void send_dist_to_segment(void){
 //7 Segments All Clear - Set Reset - D0 = High to clear 7 segments
 void pinA3_High_output(void){
     GPIO_PORTA_DATA_R |= 0x0C;
+}
+
+//Pin D0 = Low
+void pinA3_Low_output(void){
+    GPIO_PORTA_DATA_R &= ~0x0C;
 }
 
 //System Clock
