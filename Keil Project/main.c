@@ -6,7 +6,8 @@
                         //Global Variables to be used
 double dist_travelled = 0;
 double old_dist = 0;
-char dist_buffer[16];												
+char dist_buffer[16];	
+double PI = 3.1415926535 ;
 												
 								
 //---------------------------------------------------------------------------
@@ -117,13 +118,16 @@ void portA(void){
         GPIO_PORTA_PCTL_R = 0x00000000;
         GPIO_PORTA_DATA_R = 0x00;
 }
-//Distance calculate function
 double calculate_distance(double pre_lati, double pre_longi,double lati, double longi){
+        pre_lati = pre_lati*PI/180;
+        pre_longi = pre_longi*PI/180;
+        lati = lati*PI/180;
+        longi = longi*PI/180;
         double delta_lati = lati - pre_lati;
         double delta_longi = longi - pre_longi;
         double R = 6371000; // radias in meters to get the result in meters
-        double a = pow(sin(delta_lati/2),2) + cos(pre_lati) * cos(lati) * pow(sin(delta_longi/2),2) ;
-        double c = 2 * atan2(sqrt(a), sqrt(1-a));
+        double a = (pow(sin(delta_lati/2),2)) + (cos(pre_lati) * cos(lati) * pow(sin(delta_longi/2),2)) ;
+        double c = 2 * asin(sqrt(a));
         double d = R * c;
         return d;
 }
