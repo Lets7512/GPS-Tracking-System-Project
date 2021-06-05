@@ -820,14 +820,14 @@ Image Symbol Table
     [Anonymous Symbol]                       0x00000eac   Section        0  main.o(.text.delay_us)
     [Anonymous Symbol]                       0x00000ed0   Section        0  main.o(.text.light_led_after_100m)
     [Anonymous Symbol]                       0x00000f00   Section        0  main.o(.text.main)
-    [Anonymous Symbol]                       0x00000fa4   Section        0  main.o(.text.pinA3_High_output)
-    [Anonymous Symbol]                       0x00000fb8   Section        0  main.o(.text.pinA3_Low_output)
-    [Anonymous Symbol]                       0x00000fcc   Section        0  main.o(.text.portA)
-    [Anonymous Symbol]                       0x00001004   Section        0  main.o(.text.portB)
-    [Anonymous Symbol]                       0x0000103c   Section        0  main.o(.text.portF)
-    [Anonymous Symbol]                       0x000010b4   Section        0  main.o(.text.red_led_output)
-    [Anonymous Symbol]                       0x000010d0   Section        0  main.o(.text.send_dist_to_segment)
-    [Anonymous Symbol]                       0x000010f4   Section        0  main.o(.text.update_7_segment)
+    [Anonymous Symbol]                       0x00000fa8   Section        0  main.o(.text.pinA3_High_output)
+    [Anonymous Symbol]                       0x00000fbc   Section        0  main.o(.text.pinA3_Low_output)
+    [Anonymous Symbol]                       0x00000fd0   Section        0  main.o(.text.portA)
+    [Anonymous Symbol]                       0x00001008   Section        0  main.o(.text.portB)
+    [Anonymous Symbol]                       0x00001040   Section        0  main.o(.text.portF)
+    [Anonymous Symbol]                       0x000010b8   Section        0  main.o(.text.red_led_output)
+    [Anonymous Symbol]                       0x000010d4   Section        0  main.o(.text.send_dist_to_segment)
+    [Anonymous Symbol]                       0x000010f8   Section        0  main.o(.text.update_7_segment)
     [Anonymous Symbol]                       0x00001160   Section        0  main.o(.text.update_dist_travelled)
     CL$$btod_d2e                             0x000011b8   Section       62  btod.o(CL$$btod_d2e)
     CL$$btod_d2e_denorm_low                  0x000011f6   Section       70  btod.o(CL$$btod_d2e_denorm_low)
@@ -1127,15 +1127,15 @@ Image Symbol Table
     delay_ms                                 0x00000e85   Thumb Code    38  main.o(.text.delay_ms)
     delay_us                                 0x00000ead   Thumb Code    30  main.o(.text.delay_us)
     light_led_after_100m                     0x00000ed1   Thumb Code    48  main.o(.text.light_led_after_100m)
-    main                                     0x00000f01   Thumb Code   152  main.o(.text.main)
-    pinA3_High_output                        0x00000fa5   Thumb Code    18  main.o(.text.pinA3_High_output)
-    pinA3_Low_output                         0x00000fb9   Thumb Code    18  main.o(.text.pinA3_Low_output)
-    portA                                    0x00000fcd   Thumb Code    56  main.o(.text.portA)
-    portB                                    0x00001005   Thumb Code    56  main.o(.text.portB)
-    portF                                    0x0000103d   Thumb Code   120  main.o(.text.portF)
-    red_led_output                           0x000010b5   Thumb Code    26  main.o(.text.red_led_output)
-    send_dist_to_segment                     0x000010d1   Thumb Code    34  main.o(.text.send_dist_to_segment)
-    update_7_segment                         0x000010f5   Thumb Code   102  main.o(.text.update_7_segment)
+    main                                     0x00000f01   Thumb Code   156  main.o(.text.main)
+    pinA3_High_output                        0x00000fa9   Thumb Code    18  main.o(.text.pinA3_High_output)
+    pinA3_Low_output                         0x00000fbd   Thumb Code    18  main.o(.text.pinA3_Low_output)
+    portA                                    0x00000fd1   Thumb Code    56  main.o(.text.portA)
+    portB                                    0x00001009   Thumb Code    56  main.o(.text.portB)
+    portF                                    0x00001041   Thumb Code   120  main.o(.text.portF)
+    red_led_output                           0x000010b9   Thumb Code    26  main.o(.text.red_led_output)
+    send_dist_to_segment                     0x000010d5   Thumb Code    34  main.o(.text.send_dist_to_segment)
+    update_7_segment                         0x000010f9   Thumb Code   102  main.o(.text.update_7_segment)
     update_dist_travelled                    0x00001161   Thumb Code    88  main.o(.text.update_dist_travelled)
     _btod_d2e                                0x000011b9   Thumb Code    62  btod.o(CL$$btod_d2e)
     _d2e_denorm_low                          0x000011f7   Thumb Code    70  btod.o(CL$$btod_d2e_denorm_low)
@@ -1290,20 +1290,20 @@ Memory Map of the image
     0x00000eac   0x00000eac   0x0000001e   Code   RO           40    .text.delay_us      main.o
     0x00000eca   0x00000eca   0x00000006   PAD
     0x00000ed0   0x00000ed0   0x00000030   Code   RO           28    .text.light_led_after_100m  main.o
-    0x00000f00   0x00000f00   0x000000a4   Code   RO            2    .text.main          main.o
-    0x00000fa4   0x00000fa4   0x00000012   Code   RO           14    .text.pinA3_High_output  main.o
-    0x00000fb6   0x00000fb6   0x00000002   PAD
-    0x00000fb8   0x00000fb8   0x00000012   Code   RO           16    .text.pinA3_Low_output  main.o
-    0x00000fca   0x00000fca   0x00000002   PAD
-    0x00000fcc   0x00000fcc   0x00000038   Code   RO           12    .text.portA         main.o
-    0x00001004   0x00001004   0x00000038   Code   RO           10    .text.portB         main.o
-    0x0000103c   0x0000103c   0x00000078   Code   RO            8    .text.portF         main.o
-    0x000010b4   0x000010b4   0x0000001a   Code   RO           42    .text.red_led_output  main.o
-    0x000010ce   0x000010ce   0x00000002   PAD
-    0x000010d0   0x000010d0   0x00000022   Code   RO           38    .text.send_dist_to_segment  main.o
-    0x000010f2   0x000010f2   0x00000002   PAD
-    0x000010f4   0x000010f4   0x00000066   Code   RO           24    .text.update_7_segment  main.o
-    0x0000115a   0x0000115a   0x00000006   PAD
+    0x00000f00   0x00000f00   0x000000a8   Code   RO            2    .text.main          main.o
+    0x00000fa8   0x00000fa8   0x00000012   Code   RO           14    .text.pinA3_High_output  main.o
+    0x00000fba   0x00000fba   0x00000002   PAD
+    0x00000fbc   0x00000fbc   0x00000012   Code   RO           16    .text.pinA3_Low_output  main.o
+    0x00000fce   0x00000fce   0x00000002   PAD
+    0x00000fd0   0x00000fd0   0x00000038   Code   RO           12    .text.portA         main.o
+    0x00001008   0x00001008   0x00000038   Code   RO           10    .text.portB         main.o
+    0x00001040   0x00001040   0x00000078   Code   RO            8    .text.portF         main.o
+    0x000010b8   0x000010b8   0x0000001a   Code   RO           42    .text.red_led_output  main.o
+    0x000010d2   0x000010d2   0x00000002   PAD
+    0x000010d4   0x000010d4   0x00000022   Code   RO           38    .text.send_dist_to_segment  main.o
+    0x000010f6   0x000010f6   0x00000002   PAD
+    0x000010f8   0x000010f8   0x00000066   Code   RO           24    .text.update_7_segment  main.o
+    0x0000115e   0x0000115e   0x00000002   PAD
     0x00001160   0x00001160   0x00000058   Code   RO           22    .text.update_dist_travelled  main.o
     0x000011b8   0x000011b8   0x0000003e   Code   RO          260    CL$$btod_d2e        c_w.l(btod.o)
     0x000011f6   0x000011f6   0x00000046   Code   RO          262    CL$$btod_d2e_denorm_low  c_w.l(btod.o)
@@ -1361,14 +1361,14 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   Object Name
 
-      1056         36          0          0         32       4319   main.o
+      1060         36          0          0         32       4319   main.o
        276         24        620          0        512       5516   startup_tm4c123.o
        112          0          0          0          0       6555   system_tm4c123.o
 
     ----------------------------------------------------------------------
       1472         60        636          0        544      16390   Object Totals
          0          0         16          0          0          0   (incl. Generated)
-        28          0          0          0          0          0   (incl. Padding)
+        24          0          0          0          0          0   (incl. Padding)
 
     ----------------------------------------------------------------------
 

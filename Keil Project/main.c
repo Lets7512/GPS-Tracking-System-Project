@@ -46,14 +46,14 @@ void update_dist_travelled(void);
 void LCD_Init(void);
 void LCD_Send_Command(unsigned char choice);
 void LCD_Send_Data(unsigned char data);
-void LCD_Print(char str[16],int row);
+void LCD_Print(char str[],int row);
 
 //--------------------------------------------------------------------------
                         // Main Function
 int main()
 {
 	Systick_init();
-	delay_ms(100);
+	delay_ms(1000);
 	portF(); // Initialize PortF for the LEDs
 	portB(); // for data pins
 	portA(); // A5,A6,A7 as RS , R/W , E, reset and clock segement
@@ -282,7 +282,7 @@ void LCD_Send_Data(unsigned char data){
 	GPIO_PORTA_DATA_R = 0;  // Making the Latch From Low to High
 }
 //LCD Print Function
-void LCD_Print(char str[16],int row){
+void LCD_Print(char str[],int row){
 	if (row == 0){
 	LCD_Send_Command(first_row);
 	}
