@@ -33,6 +33,7 @@ void red_led_output(void);
 double calculate_distance(double pre_lati, double pre_longi,double lati, double longi);
 void update_dist_travelled(void);
 void LCD_Init(void);
+void LCD_Send_Command(unsigned char choice);
 //--------------------------------------------------------------------------
                         // Main Function
 int main(){
@@ -222,4 +223,13 @@ void LCD_Init(void){
 	delay_ms(2);
 	LCD_Send_Command(DispOn);
 	delay_ms(2);
+}
+
+//LCD Send Command
+void LCD_Send_Command(unsigned char choice){
+	GPIO_PORTA_DATA_R = 0; // Making RS and R/W with 0
+	GPIO_PORTB_DATA_R = choice; // Sending Command
+	GPIO_PORTA_DATA_R |= 0x80;  // Making the Latch From Low to High
+	delay_us(40);
+	GPIO_PORTA_DATA_R = 0;  // Making the Latch From Low to High
 }
