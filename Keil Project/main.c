@@ -1,7 +1,7 @@
                         //Include headers Section
 #include "tm4c123gh6pm.h"
 #include "math.h"
-#include "string.h"
+//#include "string.h"
 //---------------------------------------------------------------------------
                         //Defines for LCD
 #define ClearDisp 0x01
@@ -290,7 +290,7 @@ void LCD_Print(char str[16],int row){
 		LCD_Send_Command(second_row);
 	}
 	delay_us(100);
-	for (int i = 0; i < strlen(str);i++){
+	for (int i = 0; i < str[i];i++){
 		LCD_Send_Command(shift_cursor);
 		delay_us(100);
     		LCD_Send_Data(str[i]);
