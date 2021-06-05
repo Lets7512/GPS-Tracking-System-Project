@@ -28,11 +28,6 @@ Project File Date:  06/04/2021
 *** Using Compiler 'V6.16', folder: 'C:\Keil_v5\ARM\ARMCLANG\Bin'
 Rebuild target 'Target 1'
 assembling startup_TM4C123.s...
-main.c(33): warning: no newline at end of file [-Wnewline-eof]
-}
- ^
-1 warning generated.
-compiling main.c...
 RTE/Device/TM4C123GH6PM/system_TM4C123.c(13): warning: In file included from...
 C:/Users/Omar/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C123\TM4C123.h(98): warning: In file included from...
 C:/Users/Omar/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C123/TM4C123GH6PM.h(298): warning: anonymous unions are a C11 extension [-Wc11-extensions]
@@ -169,9 +164,66 @@ C:/Users/Omar/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C123
   ^
 44 warnings generated.
 compiling system_TM4C123.c...
+main.c(18): warning: no previous extern declaration for non-static variable 'dist_travelled' [-Wmissing-variable-declarations]
+double dist_travelled = 0;
+       ^
+main.c(18): note: declare 'static' if the variable is not intended to be used outside of this translation unit
+double dist_travelled = 0;
+^
+main.c(19): warning: no previous extern declaration for non-static variable 'old_dist' [-Wmissing-variable-declarations]
+double old_dist = 0;
+       ^
+main.c(19): note: declare 'static' if the variable is not intended to be used outside of this translation unit
+double old_dist = 0;
+^
+main.c(21): warning: no previous extern declaration for non-static variable 'PI' [-Wmissing-variable-declarations]
+double PI = 3.1415926535 ;
+       ^
+main.c(21): note: declare 'static' if the variable is not intended to be used outside of this translation unit
+double PI = 3.1415926535 ;
+^
+main.c(72): warning: implicitly declaring library function 'snprintf' with type 'int (char *, unsigned int, const char *, ...)' [-Wimplicit-function-declaration]
+                snprintf(dist_buffer, sizeof(dist_buffer),"Dist: %.1lf",dist_travelled);
+                ^
+main.c(72): note: include the header <stdio.h> or explicitly provide a declaration for 'snprintf'
+main.c(96): warning: implicit conversion changes signedness: 'int' to 'unsigned long' [-Wsign-conversion]
+        GPIO_PORTF_AMSEL_R &= ~0x0E;                    // Analog select ; clear 3 pins of LEDs of analog property
+                           ~~ ^~~~~
+main.c(97): warning: implicit conversion changes signedness: 'int' to 'unsigned long' [-Wsign-conversion]
+        GPIO_PORTF_AFSEL_R &= ~0x0E;                    // Alternative function or General Purpose Selection; here we selected GPIO
+                           ~~ ^~~~~
+main.c(98): warning: implicit conversion changes signedness: 'int' to 'unsigned long' [-Wsign-conversion]
+        GPIO_PORTF_PCTL_R &= ~0x0000FFF0;               // Definition of the alternative function of the pin; here we clear the leds pins
+                          ~~ ^~~~~~~~~~~
+main.c(99): warning: implicit conversion changes signedness: 'int' to 'unsigned long' [-Wsign-conversion]
+        GPIO_PORTF_DATA_R &= ~0x0E;                     // clear data from LEDs.
+                          ~~ ^~~~~
+main.c(226): warning: implicit conversion changes signedness: 'int' to 'unsigned long' [-Wsign-conversion]
+    GPIO_PORTA_DATA_R &=~0x04;
+                      ~~^~~~~
+main.c(236): warning: implicit conversion changes signedness: 'int' to 'unsigned long' [-Wsign-conversion]
+    GPIO_PORTA_DATA_R &= ~0x0C;
+                      ~~ ^~~~~
+main.c(248): warning: implicit conversion changes signedness: 'int' to 'unsigned long' [-Wsign-conversion]
+        GPIO_PORTF_DATA_R &= ~(0x0E);
+                          ~~ ^~~~~~~
+main.c(299): warning: no newline at end of file [-Wnewline-eof]
+}
+ ^
+main.c(293): warning: comparison of integers of different signs: 'int' and 'unsigned int' [-Wsign-compare]
+        for (int i = 0; i < strlen(str);i++){
+                        ~ ^ ~~~~~~~~~~~
+main.c(20): warning: no previous extern declaration for non-static variable 'dist_buffer' [-Wmissing-variable-declarations]
+char dist_buffer[16];   
+     ^
+main.c(20): note: declare 'static' if the variable is not intended to be used outside of this translation unit
+char dist_buffer[16];   
+^
+14 warnings generated.
+compiling main.c...
 linking...
-Program Size: Code=676 RO-data=636 RW-data=0 ZI-data=608  
-".\GPS_Tracking_System.axf" - 0 Error(s), 45 Warning(s).
+Program Size: Code=7584 RO-data=812 RW-data=0 ZI-data=640  
+".\GPS_Tracking_System.axf" - 0 Error(s), 58 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -197,9 +249,9 @@ Package Vendor: Keil
    * Component: ARM::CMSIS:CORE:5.4.0
 
    * Component: Keil::Device:Startup:1.0.1
-      Include file:  Device\Include\TM4C123\TM4C123.h
       Source file:   Device\Source\ARM\startup_TM4C123.s
       Source file:   Device\Source\system_TM4C123.c
+      Include file:  Device\Include\TM4C123\TM4C123.h
 Build Time Elapsed:  00:00:01
 </pre>
 </body>

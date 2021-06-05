@@ -3,6 +3,17 @@
 #include "math.h"
 #include "string.h"
 //---------------------------------------------------------------------------
+                        //Defines for LCD
+#define ClearDisp 0x01
+#define WakeUp 0x30
+#define x5x7_chars_8bit 0x38
+#define x5x7_chars_4bit 0x28
+#define DispOn 0x0C // No Blinking and No Cursor
+#define shift_cursor 0x06
+#define first_row 0x80
+#define second_row 0xC0
+#define Set5x7FontSize    0x20
+//---------------------------------------------------------------------------
                         //Global Variables to be used
 double dist_travelled = 0;
 double old_dist = 0;
@@ -39,10 +50,35 @@ void LCD_Print(char str[16],int row);
 
 //--------------------------------------------------------------------------
                         // Main Function
-int main(){
-	
+int main()
+{
+	Systick_init();
+	delay_ms(100);
+	portF(); // Initialize PortF for the LEDs
+	portB(); // for data pins
+	portA(); // A5,A6,A7 as RS , R/W , E, reset and clock segement
+	pinA3_High_output();
+	delay_ms(50);
+  pinA3_Low_output();
+	LCD_Init();
+	LCD_Send_Command(ClearDisp);
+	delay_ms(1);
+ while(1)
+  {
+		update_dist_travelled();
+		delay_ms(25);
+    update_7_segment();
+    delay_ms(25);
+		snprintf(dist_buffer, sizeof(dist_buffer),"Dist: %.1lf",dist_travelled);
+	  LCD_Send_Command(first_row);
+	  delay_ms(25);
+    LCD_Print(dist_buffer,0);
+		delay_ms(25);
+		LCD_Send_Command(first_row);
+		light_led_after_100m();
+		delay_ms(25);
+	}				
 }
-
 
 
 
