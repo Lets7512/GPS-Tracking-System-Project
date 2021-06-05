@@ -32,6 +32,7 @@ void light_led_after_100m(void);
 void red_led_output(void);
 double calculate_distance(double pre_lati, double pre_longi,double lati, double longi);
 void update_dist_travelled(void);
+void LCD_Init(void);
 //--------------------------------------------------------------------------
                         // Main Function
 int main(){
@@ -206,4 +207,19 @@ void light_led_after_100m(void){
 void red_led_output(void){
         GPIO_PORTF_DATA_R &= ~(0x0E);
         GPIO_PORTF_DATA_R |= 0x02;
+}
+//LCD Initialize
+void LCD_Init(void){
+	LCD_Send_Command(WakeUp);
+	delay_us(30);
+	LCD_Send_Command(Set5x7FontSize);
+	delay_us(30);
+	LCD_Send_Command(x5x7_chars_8bit);
+	delay_us(30);
+	LCD_Send_Command(shift_cursor);
+	delay_us(30);
+	LCD_Send_Command(ClearDisp);
+	delay_ms(2);
+	LCD_Send_Command(DispOn);
+	delay_ms(2);
 }
