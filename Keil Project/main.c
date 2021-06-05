@@ -35,6 +35,8 @@ void update_dist_travelled(void);
 void LCD_Init(void);
 void LCD_Send_Command(unsigned char choice);
 void LCD_Send_Data(unsigned char data);
+void LCD_Print(char str[16],int row);
+
 //--------------------------------------------------------------------------
                         // Main Function
 int main(){
@@ -242,4 +244,20 @@ void LCD_Send_Data(unsigned char data){
 	GPIO_PORTA_DATA_R |= 0x80;  // Making the Latch From Low to High
 	delay_us(40);
 	GPIO_PORTA_DATA_R = 0;  // Making the Latch From Low to High
+}
+//LCD Print Function
+void LCD_Print(char str[16],int row){
+	if (row == 0){
+	LCD_Send_Command(first_row);
+	}
+	else{
+		LCD_Send_Command(second_row);
+	}
+	delay_us(100);
+	for (int i = 0; i < strlen(str);i++){
+		LCD_Send_Command(shift_cursor);
+		delay_us(100);
+    		LCD_Send_Data(str[i]);
+		delay_us(100);
+	}
 }
