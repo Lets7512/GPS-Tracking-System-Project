@@ -107,7 +107,6 @@ void Process_GSA(char raw_data[]);
 void Process_GLL(char raw_data[]);
 void Process_GGA(char raw_data[]);
 void Process_RMC(char raw_data[]);
-char* substr(char str[],int start,int stop);
 char *subString(char *someString, int begin, int end);
 int checksum(char raw_data[]);
 void parse_GSV(char GSV_data[]);
