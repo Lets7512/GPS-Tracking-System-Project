@@ -50,3 +50,30 @@ void update_dist_travelled(void){
 }
 
 //-------------------------------------------------------------------------
+
+double convert_lat_to_decimal_degree(char coord_arr[])
+{
+	char degree_arr[2];
+	char minutes_arr[8];
+	double degree,minutes,decimal_Degrees;
+	strncpy(degree_arr, coord_arr,2);
+	strncpy(minutes_arr, coord_arr+2,8);
+	degree = atof(degree_arr);
+	minutes = atof(minutes_arr);
+	decimal_Degrees = degree + (minutes/60);
+	return decimal_Degrees;
+}
+double convert_long_to_decimal_degree(char coord_arr[])
+{
+	char degree_arr[3];
+	char minutes_arr[8];
+	double degree,minutes,decimal_Degrees;
+	strncpy(degree_arr, coord_arr,3);
+	strncpy(minutes_arr, coord_arr+3,8);
+	degree = atof(degree_arr);
+	minutes = atof(minutes_arr);
+	decimal_Degrees = degree + (minutes/60);
+	return decimal_Degrees;
+}
+
+//---------------------------------------------------------------------------
