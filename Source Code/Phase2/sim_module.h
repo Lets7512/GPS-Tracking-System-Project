@@ -59,9 +59,9 @@ void gsm_send_uart(char command[]) {
 	char temp_arr[128];
 	strcpy(temp_arr,"Send ->: ");
 	strcat(temp_arr,command);
-  UART0_WriteString(temp_arr);
-   UART0_WriteString(command);
-	UART0_Write('\n');
+  UART3_WriteString(temp_arr);
+   UART3_WriteString(command);
+	UART3_Write('\n');
 	delay_ms(500);
-  UART0_Write('\n');
+  UART3_Write('\n');
 }
