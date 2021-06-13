@@ -3,6 +3,7 @@
 
 void LCD_Init(void);
 void LCD_Send_Command(unsigned char choice);
+void LCD_Send_Data(unsigned char data);
 
 #endif
 
@@ -31,6 +32,15 @@ void LCD_Init(void){
 void LCD_Send_Command(unsigned char choice){
     GPIO_PORTA_DATA_R = 0; // Making RS and R/W with 0
     GPIO_PORTB_DATA_R = choice; // Sending Command
+    GPIO_PORTA_DATA_R |= 0x80;  // Making the Latch From Low to High
+    delay_us(40);
+    GPIO_PORTA_DATA_R = 0;  // Making the Latch From Low to High
+}
+
+//LCD send data
+void LCD_Send_Data(unsigned char data){
+    GPIO_PORTA_DATA_R = 0x20; // Making RS 1 and R/W with 0
+    GPIO_PORTB_DATA_R = data; // Sending Command
     GPIO_PORTA_DATA_R |= 0x80;  // Making the Latch From Low to High
     delay_us(40);
     GPIO_PORTA_DATA_R = 0;  // Making the Latch From Low to High
