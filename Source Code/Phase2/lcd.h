@@ -1,3 +1,17 @@
+
+//Defines for LCD
+#define ClearDisp 0x01
+#define WakeUp 0x30
+#define x5x7_chars_8bit 0x38
+#define x5x7_chars_4bit 0x28
+#define DispOn 0x0C // No Blinking and No Cursor
+#define shift_cursor 0x06
+#define first_row 0x80
+#define second_row 0xC0
+#define Set5x7FontSize 0x20
+
+
+
 #ifndef LCD_FUNCS_H
 #define LCD_FUNCS_H
 
