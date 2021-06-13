@@ -5,6 +5,10 @@ void send_dist_to_segment(void);
 void pinA3_High_output(void);
 void pinA3_Low_output(void);
 //--------------------------------------------------------------------------
+void light_led_after_100m(void);
+void light_led_at_distance(void);
+void red_led_output(void);
+//--------------------------------------------------------------------------
        //Function Definition
 
 //Update 7 Segment Readings
@@ -32,4 +36,25 @@ void pinA3_High_output(void){
 //Pin D0 = Low
 void pinA3_Low_output(void){
     GPIO_PORTA_DATA_R &= ~0x0C;
+}
+//Turn on LED after 100m
+void light_led_after_100m(void){
+    if(dist_travelled >= 100){
+        red_led_output(); //led red o/p function
+    }
+}
+
+//LED Distance reached
+void light_led_at_distance(void){
+	double till_point;
+	till_point = calculate_distance(current_lat,current_long,dst_lat,dst_long);
+    	if(till_point<=15){
+        	red_led_output(); //led red o/p function
+    	}
+}
+
+//LEDs Reset Function and Turn on red LED
+void red_led_output(void){
+        GPIO_PORTF_DATA_R &= ~(0x0E);
+        GPIO_PORTF_DATA_R |= 0x02;
 }
