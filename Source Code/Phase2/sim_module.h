@@ -1,3 +1,8 @@
+char apn[21] = "internet.vodafone.net";                    //APN
+char apn_u[1] = "";                     //APN-Username
+char apn_p[1] = "";                     //APN-Password
+char url[36] = "en558zika04rpsq.m.pipedream.net/gps";
+char http_date_buffer[256];
 
 void gsm_http_post(char http_post_request_info[]);
 void gsm_send_uart(char command[]);
