@@ -2,6 +2,7 @@
 //---------------------------------------------------------------------------
 void update_7_segment(void);
 void send_dist_to_segment(void);
+void pinA3_High_output(void);
 //--------------------------------------------------------------------------
        //Function Definition
 
@@ -22,4 +23,8 @@ void send_dist_to_segment(void){
     GPIO_PORTA_DATA_R |= 0x04; // Pin A2
     delay_us(40);
     GPIO_PORTA_DATA_R &=~0x04;
+}
+//7 Segments All Clear - Set Reset - D0 = High to clear 7 segments
+void pinA3_High_output(void){
+    GPIO_PORTA_DATA_R |= 0x0C;
 }
