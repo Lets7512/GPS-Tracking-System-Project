@@ -1,5 +1,7 @@
                   //Function declaration
 //---------------------------------------------------------------------------
+void Systick_init(void);
+//---------------------------------------------------------------------------
 void update_7_segment(void);
 void send_dist_to_segment(void);
 void pinA3_High_output(void);
@@ -21,6 +23,14 @@ void update_7_segment(void){
             }
             old_dist = dist_travelled;
         }
+}
+//-------------------------------------------------------------------------
+//System Clock
+void Systick_init(void){
+        NVIC_ST_RELOAD_R = 16;  // for us delay
+        //NVIC_ST_RELOAD_R = 16;  // for us delay
+        NVIC_ST_CTRL_R = 5;
+        NVIC_ST_CURRENT_R = 0;
 }
 //--------------------------------------------------------------------------
 //Send distance to 7 segments
