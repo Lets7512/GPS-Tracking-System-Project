@@ -166,65 +166,6 @@ enum GGA_index gga_tm = tm_GGA;
 enum RMC_index rmc_speed = speed_RMC;
 
 //--------------------------------------------------------------------------
-                        // Main Function
-int main(){
-
-	int counter,i =0;
-    Systick_init();
-	delay_ms(1000);
-    portF(); // Initialize PortF for the LEDs
-    portB(); // for data pins
-    portA(); // A5,A6,A7 as RS , R/W , E, reset and clock segement
-    pinA3_High_output();
-    delay_ms(50);
-    pinA3_Low_output();
-    LCD_Init();
-	LCD_Send_Command(first_row);
-    UART0_Init();
-    UART3_Init();
-	sprintf(location_buffer,"GPS Tracking Sys");
-	sprintf(location_buffer1,"ASU Students G20");
-	LCD_Print(location_buffer,0);
-	LCD_Print(location_buffer1,1);
-	gsm_config_gprs();
-	delay_ms(2000);
-
-    while(1){
-
-		UART3_ReadString(gps_raw,'$','*',4);
-		delay_ms(100);
-		Process_RMC(gps_raw);
-		UART0_WriteString(gps_raw);
-		update_time();
-		update_GPS_vars();
-		update_dist_travelled();
-		update_remaining_distance();
-		normalized_speed = normalize(speed,speed_history);
-		mean_speed = mean_of_array(speed_history);
-		sprintf(location_buffer,"wlk:%d untl:%d",(int)dist_travelled,(int)remaining_dst);
-				
-		if (remaining_dst < 20 && remaining_dst > 0.001){
-			sprintf(location_buffer,"You Reached Dst");
-		}
-
-		LCD_Print("                 ",0);
-		LCD_Print(location_buffer,0);
-				
-		sprintf(location_buffer1,"NS:%.1lf S:%.1lf",fabs(normalized_speed),speed);
-			
-		LCD_Print("                 ",1);
-		LCD_Print(location_buffer1,1);
-		update_7_segment();
-		light_led_at_distance();
-
-		if(time_seconds % 30){
-			snprintf(http_date_buffer, sizeof(http_date_buffer),"{\"sent_info\":\"%.6lf,%.6lf\"}",current_lat,current_long);
-			gsm_http_post(http_date_buffer);
-		}
-	}
-}
-
-//--------------------------------------------------------------------------
                         //Function Definition
 
 //PortF Intialize to use with Tiva Board LEDs
