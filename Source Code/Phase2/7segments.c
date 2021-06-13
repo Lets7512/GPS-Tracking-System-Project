@@ -2,6 +2,7 @@
 //---------------------------------------------------------------------------
 void Systick_init(void);
 void delay_ms(int i);
+void delay_us(int i);
 //---------------------------------------------------------------------------
 void update_7_segment(void);
 void send_dist_to_segment(void);
@@ -37,6 +38,15 @@ void Systick_init(void){
 void delay_ms(int i){
     int counter = 0;
     while(counter != i*1000){
+        if(NVIC_ST_CTRL_R & 0x10000){
+            counter++;
+        }
+    }
+}
+//Delay in us function to be used
+void delay_us(int i){
+    int counter = 0;
+    while(counter != i){
         if(NVIC_ST_CTRL_R & 0x10000){
             counter++;
         }
