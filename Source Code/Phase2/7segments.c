@@ -6,6 +6,7 @@ void pinA3_High_output(void);
 void pinA3_Low_output(void);
 //--------------------------------------------------------------------------
 void light_led_after_100m(void);
+void light_led_at_distance(void);
 //--------------------------------------------------------------------------
        //Function Definition
 
@@ -40,3 +41,12 @@ void light_led_after_100m(void){
     if(dist_travelled >= 100){
         red_led_output(); //led red o/p function
     }
+}
+
+//LED Distance reached
+void light_led_at_distance(void){
+	double till_point;
+	till_point = calculate_distance(current_lat,current_long,dst_lat,dst_long);
+    	if(till_point<=15){
+        	red_led_output(); //led red o/p function
+    	}
