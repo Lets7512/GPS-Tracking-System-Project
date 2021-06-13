@@ -77,3 +77,13 @@ double convert_long_to_decimal_degree(char coord_arr[])
 }
 
 //---------------------------------------------------------------------------
+
+void update_remaining_distance(void)
+{
+	if (current_lat>0 && current_long>0)
+	{
+	remaining_dst = calculate_distance(current_lat,current_long,dst_lat,dst_long);
+	}
+}
+
+//----------------------------------------------------------------------------
