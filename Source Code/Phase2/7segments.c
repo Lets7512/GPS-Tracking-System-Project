@@ -1,6 +1,7 @@
                   //Function declaration
 //---------------------------------------------------------------------------
 void update_7_segment(void);
+void send_dist_to_segment(void);
 //--------------------------------------------------------------------------
        //Function Definition
 
@@ -14,4 +15,11 @@ void update_7_segment(void){
             }
             old_dist = dist_travelled;
         }
+}
+//--------------------------------------------------------------------------
+//Send distance to 7 segments
+void send_dist_to_segment(void){
+    GPIO_PORTA_DATA_R |= 0x04; // Pin A2
+    delay_us(40);
+    GPIO_PORTA_DATA_R &=~0x04;
 }
