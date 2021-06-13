@@ -1,6 +1,11 @@
 void Process_GGA(char raw_data[]);
 void parse_GGA(char GGA_data[]);
 void update_GPS_vars(void);
+void Process_GSA(char raw_data[]);
+void parse_GSA(char GSA_data[]);
+char GSV_data_parsed[20][30];
+void Process_GSV(char raw_data[]);
+void parse_GSV(char GSV_data[]);
 
 ----------------------------------------------
 
@@ -61,18 +66,72 @@ void update_GPS_vars(void)
 		}
 		return;
 	}
-	/*
-	else if(strcmp(GLL_data_parsed[gll_valid],"A")==0)
-	{
-		current_lat = convert_lat_to_decimal_degree(GLL_data_parsed[lat_gll]);
-		current_long = convert_long_to_decimal_degree(GLL_data_parsed[long_gll]);
-		return;
-	}
-	else if(atoi(GGA_data_parsed[gga_quality])==1 || atoi(GGA_data_parsed[gga_quality])==2 || atoi(GGA_data_parsed[gga_quality])==3)
-	{
-		current_lat = convert_lat_to_decimal_degree(GGA_data_parsed[lat_gga]);
-		current_long = convert_long_to_decimal_degree(GGA_data_parsed[long_gga]);
-		return;
-	}*/
 	
 }
+
+//GSA Process Function
+void Process_GSA(char raw_data[]){
+	char tmp_data[6];
+
+	if(strcmp(strncpy(tmp_data, raw_data, 6),"$GPGSA")==0){
+		parse_GSA(raw_data);
+	}
+}
+
+//GSA parse
+void parse_GSA(char GSA_data[]){
+	int len,i,row,col,size;
+	char data[20][20]={'0'};
+	len = strlen(GSA_data);
+	row = 0;
+	col =0;
+
+	for(i=7;i<len;i++){
+		if(GSA_data[i]==',' || GSA_data[i]=='*'){
+			row++;
+			col =0;
+			continue;
+		}
+		data[row][col] = GSA_data[i];
+		col++;
+	}
+
+	size = sizeof(data)/sizeof(data[0]);
+	for (i = 0; i < size; i++){
+        strcpy(GSA_data_parsed[i], data[i]);
+    }
+}
+
+//GSV Process Function
+void Process_GSV(char raw_data[]){
+	char tmp_data[6];
+
+	if(strcmp(strncpy(tmp_data, raw_data, 6),"$GPGSV")==0){
+		parse_GSV(raw_data);
+	}
+}
+//GSV parse
+void parse_GSV(char GSV_data[])
+{
+	int len,i,row,col,size;
+	char data[20][30]={'0'};
+	len = strlen(GSV_data);
+	row = 0;
+	col =0;
+
+	for(i=7;i<len;i++){
+		if(GSV_data[i]==',' || GSV_data[i]=='*'){
+			row++;
+			col =0;
+			continue;
+		}
+		data[row][col] = GSV_data[i];
+		col++;
+	}
+
+	size = sizeof(data)/sizeof(data[0]);
+	for (i = 0; i < size; i++){
+        	strcpy(GSV_data_parsed[i], data[i]);
+    	}
+}
+
