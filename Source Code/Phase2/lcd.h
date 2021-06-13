@@ -5,6 +5,7 @@ void LCD_Init(void);
 void LCD_Send_Command(unsigned char choice);
 void LCD_Send_Data(unsigned char data);
 void LCD_Print(char str[],int row);
+
 #endif
 
 
