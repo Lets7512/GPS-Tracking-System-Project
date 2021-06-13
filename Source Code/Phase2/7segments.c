@@ -7,6 +7,7 @@ void pinA3_Low_output(void);
 //--------------------------------------------------------------------------
 void light_led_after_100m(void);
 void light_led_at_distance(void);
+void red_led_output(void);
 //--------------------------------------------------------------------------
        //Function Definition
 
@@ -50,3 +51,10 @@ void light_led_at_distance(void){
     	if(till_point<=15){
         	red_led_output(); //led red o/p function
     	}
+}
+
+//LEDs Reset Function and Turn on red LED
+void red_led_output(void){
+        GPIO_PORTF_DATA_R &= ~(0x0E);
+        GPIO_PORTF_DATA_R |= 0x02;
+}
