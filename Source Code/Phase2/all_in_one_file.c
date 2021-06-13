@@ -170,18 +170,18 @@ enum RMC_index rmc_speed = speed_RMC;
 int main(){
 
 	int counter,i =0;
-    	Systick_init();
-    	delay_ms(1000);
-    	portF(); // Initialize PortF for the LEDs
-    	portB(); // for data pins
-    	portA(); // A5,A6,A7 as RS , R/W , E, reset and clock segement
-    	pinA3_High_output();
-    	delay_ms(50);
-    	pinA3_Low_output();
-    	LCD_Init();
+    Systick_init();
+	delay_ms(1000);
+    portF(); // Initialize PortF for the LEDs
+    portB(); // for data pins
+    portA(); // A5,A6,A7 as RS , R/W , E, reset and clock segement
+    pinA3_High_output();
+    delay_ms(50);
+    pinA3_Low_output();
+    LCD_Init();
 	LCD_Send_Command(first_row);
-    	UART0_Init();
-    	UART3_Init();
+    UART0_Init();
+    UART3_Init();
 	sprintf(location_buffer,"GPS Tracking Sys");
 	sprintf(location_buffer1,"ASU Students G20");
 	LCD_Print(location_buffer,0);
@@ -189,7 +189,7 @@ int main(){
 	gsm_config_gprs();
 	delay_ms(2000);
 
-    	while(1){
+    while(1){
 
 		UART3_ReadString(gps_raw,'$','*',4);
 		delay_ms(100);
@@ -314,18 +314,18 @@ double calculate_distance(double pre_lati, double pre_longi,double lati, double 
 	double a;
 	double c;
 	double d;
-        pre_lati = pre_lati*PI/180;
-        pre_longi = pre_longi*PI/180;
-        lati = lati*PI/180;
-        longi = longi*PI/180;
-        delta_lati = lati - pre_lati;
-        delta_longi = longi - pre_longi;
-        R = 6372795; // distance computation for hypothetical sphere of radius 6372795 meters.
-        a = (pow(sin(delta_lati/2),2)) + (cos(pre_lati) * cos(lati) * pow(sin(delta_longi/2),2)) ;
-        c = 2 * asin(sqrt(a));
-        d = R * c;
+    pre_lati = pre_lati*PI/180;
+    pre_longi = pre_longi*PI/180;
+    lati = lati*PI/180;
+    longi = longi*PI/180;
+    delta_lati = lati - pre_lati;
+    delta_longi = longi - pre_longi;
+    R = 6372795; // distance computation for hypothetical sphere of radius 6372795 meters.
+    a = (pow(sin(delta_lati/2),2)) + (cos(pre_lati) * cos(lati) * pow(sin(delta_longi/2),2)) ;
+    c = 2 * asin(sqrt(a));
+    d = R * c;
 
-        return d;
+    return d;
 }
 
 //Update 7 Segment Readings
@@ -437,7 +437,7 @@ void red_led_output(void){
 void LCD_Init(void){
     LCD_Send_Command(WakeUp);
     delay_us(40);
-		LCD_Send_Command(Set5x7FontSize);
+	LCD_Send_Command(Set5x7FontSize);
     delay_us(40);
     LCD_Send_Command(x5x7_chars_8bit);
     delay_us(40);
@@ -447,7 +447,7 @@ void LCD_Init(void){
     delay_ms(2);
     LCD_Send_Command(DispOn);
     delay_ms(2);
-		LCD_Send_Command(Set5x7FontSize);
+	LCD_Send_Command(Set5x7FontSize);
     delay_us(40);
     LCD_Send_Command(x5x7_chars_8bit);
     delay_us(40);
@@ -475,16 +475,17 @@ void LCD_Send_Data(unsigned char data){
 void LCD_Print(char str[],int row){
     int i;
     if (row == 0){
-    LCD_Send_Command(first_row);
+    	LCD_Send_Command(first_row);
     }
     else{
         LCD_Send_Command(second_row);
     }
+
     delay_us(10);
     for (i = 0; i < str[i];i++){
         LCD_Send_Command(shift_cursor);
         delay_us(40);
-            LCD_Send_Data(str[i]);
+        LCD_Send_Data(str[i]);
         delay_us(40);
     }
 }
@@ -599,21 +600,22 @@ void UART3_ReadString(char *str, char startCh ,char stopCh ,int shift){      //R
 	char c = UART3_Read();
 		
     	if (c == startCh){
-		i=-2;
+			i=-2;
     		while(c && i < shift){
         		*str = c;
         		str++;
         		c = UART3_Read();
 
-			if (c == stopCh){
-				cond = 1;
-			}
+				if (c == stopCh){
+					cond = 1;
+				}
 
-			if (cond){
-				i++;
-			}
+				if (cond){
+					i++;
+				}
     		}
     	}
+
     	*str = 0x00;
 }
 
@@ -627,6 +629,7 @@ void UART3_readString(char *str, char startCh , char stopCh){      //Read String
         	c = UART3_Read();
     	}
     }
+
     *str = 0x00;
 }
 //-------------------------------------------------------------------------
@@ -725,8 +728,7 @@ void parse_GSA(char GSA_data[]){
 }
 
 //GSV parse
-void parse_GSV(char GSV_data[])
-{
+void parse_GSV(char GSV_data[]){
 	int len,i,row,col,size;
 	char data[20][30]={'0'};
 	len = strlen(GSV_data);
@@ -746,7 +748,7 @@ void parse_GSV(char GSV_data[])
 	size = sizeof(data)/sizeof(data[0]);
 	for (i = 0; i < size; i++){
         	strcpy(GSV_data_parsed[i], data[i]);
-    	}
+    }
 }
 
 //RMC parse
@@ -807,21 +809,21 @@ void parse_GGA(char GGA_data[]){
 	len = strlen(GGA_data);
 	row = 0;
 	col =0;
-	for(i=7;i<len;i++)
-	{
-		if(GGA_data[i]==',' || GGA_data[i]=='*')
-		{
+	for(i=7;i<len;i++){
+		if(GGA_data[i]==',' || GGA_data[i]=='*'){
 			row++;
 			col =0;
 			continue;
 		}
+
 		data[row][col] = GGA_data[i];
 		col++;
 	}
+
 	size = sizeof(data)/sizeof(data[0]);
 	for (i = 0; i < size; i++){
         strcpy(GGA_data_parsed[i], data[i]);
-    	}
+    }
 }
 
 //-----------------------------------------------------------------------------------------
@@ -866,7 +868,7 @@ void update_time(void){
 	//gga_utc_time = atoi(GGA_data_parsed[rmc_tm]);
 	//sprintf(time_buffer,"%d:%d:%d",gll_utc_time,gga_utc_time,rmc_utc_time);
 	//LCD_Print(time_buffer,0);
-		strcpy(time_arr,RMC_data_parsed[rmc_tm]);
+	strcpy(time_arr,RMC_data_parsed[rmc_tm]);
 	/*
 	else if(gll_utc_time >= rmc_utc_time && rmc_utc_time >= gga_utc_time)
 	{
@@ -894,20 +896,21 @@ void update_GPS_vars(void){
 		current_long = convert_long_to_decimal_degree(RMC_data_parsed[long_rms]);
 		speed = atof(RMC_data_parsed[rmc_speed]);
 
-		if (speed !=0){
+	if (speed !=0){
 		speed_history[speed_hist_counter]=speed;
 		speed_hist_counter++;
 		speed_hist_norm_counter++;
-		}
+	}
 
-		if (speed_hist_counter >5){
+	if (speed_hist_counter >5){
 			speed_hist_counter = 0;
-		}
+	}
 
-		if(speed_hist_norm_counter > 5){
+	if(speed_hist_norm_counter > 5){
 			speed_hist_norm_counter=10;
-		}
-		return;
+	}
+
+	return;
 	}
 
 	/*
@@ -928,7 +931,7 @@ void update_GPS_vars(void){
 //Remainig Distance
 void update_remaining_distance(void){
 	if (current_lat>0 && current_long>0){
-	remaining_dst = calculate_distance(current_lat,current_long,dst_lat,dst_long);
+		remaining_dst = calculate_distance(current_lat,current_long,dst_lat,dst_long);
 	}
 }
 
@@ -942,6 +945,7 @@ double mean_of_array(double var_arr[]){
 	for(i=0;i<size;i++){
 		mean+=var_arr[i];
 	}
+
 	mean = mean / size;
 	return mean;
 }
@@ -954,6 +958,7 @@ double normalize(double var,double var_arr[]){
 	for(i=0;i<size;i++){
 		mean+=var_arr[i];
 	}
+
 	mean = mean / size;
 	for(i=0;i<size;i++){
 		diff = var_arr[i]-mean;
@@ -966,7 +971,9 @@ double normalize(double var,double var_arr[]){
 }
 
 //--------------------------------------------------------------------------------------
-				//Bonus Part
+										//Bonus Part
+/*Connect the GPS Tacking System to the Internet to send current longitude and latitude to
+  to an application to pin point multiple locations on the map*/ 
 
 void gsm_http_post(char http_post_request_info[]){
 	char temp_arr[52];
@@ -992,15 +999,17 @@ void gsm_config_gprs(void){
   	gsm_send_uart("AT+SAPBR=3,1,Contype,GPRS");
 	strcat(temp_arr,apn);
   	gsm_send_uart(temp_arr);
+
   	if (strcmp(apn_u, "")!=0){
     		gsm_send_uart("AT+SAPBR=3,1,USER,");
   	}
+
   	if (strcmp(apn_p, "")!=0){
     		gsm_send_uart("AT+SAPBR=3,1,PWD,");
   	}
 }
 
-void gsm_send_uart(char command[]) {
+void gsm_send_uart(char command[]){
 	//int cmd_size = sizeof(command)/sizeof(command[0]);
 	//int send_size = 9+cmd_size;
 	char temp_arr[128];
