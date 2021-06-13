@@ -18,8 +18,19 @@ int speed_hist_norm_counter=0;
 char location_buffer[128]; // buffer to format the output variable in
 char location_buffer1[128]; // buffer to format the output variable in
 char lat_long_hist[5];
+double speed_history[5];
+double coords_history[5];
+double normalized_speed,mean_speed;
+int speed_hist_counter=0;
+int speed_hist_norm_counter=0;
 //-------------------------------------------------------------
-
+double mean_of_array(double var_arr[]);
+double normalize(double var,double var_arr[]);
+double convert_lat_to_decimal_degree(char coord_arr[]);
+double convert_long_to_decimal_degree(char coord_arr[]);
+double calculate_distance(double pre_lati, double pre_longi,double lati, double longi);
+void update_dist_travelled(void);
+void update_remaining_distance(void);
 //-------------------------------------------------------------
 
 //Distance calculate function this function is called haversine function
@@ -107,3 +118,32 @@ void update_remaining_distance(void)
 }
 
 //----------------------------------------------------------------------------
+double mean_of_array(double var_arr[]){
+	int size= speed_hist_norm_counter;
+	int i;
+	double mean;
+	for(i=0;i<size;i++){
+		mean+=var_arr[i];
+	}
+	mean = mean / size;
+	return mean;
+}
+
+
+double normalize(double var,double var_arr[]){
+	double norm_var,mean,variance,diff;
+	int min,max,i;
+	int size= speed_hist_norm_counter;
+	for(i=0;i<size;i++){
+		mean+=var_arr[i];
+	}
+	mean = mean / size;
+	for(i=0;i<size;i++){
+		diff = var_arr[i]-mean;
+		variance += pow(diff,2);
+	}
+
+	variance=variance/size;
+	norm_var = (var - mean) / sqrt(variance);
+	return norm_var;
+}
