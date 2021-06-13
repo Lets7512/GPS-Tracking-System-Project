@@ -1,8 +1,11 @@
                       //Function declaration
 //---------------------------------------------------------------------------
 void portF(void);
-void portA(void);
+void portE(void);
+void portD(void);
 void portC(void);
+void portB(void);
+void portA(void);
 //--------------------------------------------------------------------------
                         //Function Definition
 
@@ -20,6 +23,31 @@ void portF(void){
         GPIO_PORTF_DATA_R &= ~0x0E;                     // clear data from LEDs.
 }
 
+//PortE Intialize
+void portE(void){
+        SYSCTL_RCGCGPIO_R |= 0x10;
+        while((SYSCTL_PRGPIO_R & 0x10) == 0){}
+        GPIO_PORTE_DEN_R = 0x01;
+        GPIO_PORTE_DIR_R = 0x00;
+        GPIO_PORTE_AFSEL_R = 0x00;
+        GPIO_PORTE_AMSEL_R = 0x00;
+        GPIO_PORTE_PCTL_R = 0x00000000;
+        GPIO_PORTE_DATA_R = 0x00;
+}
+
+//PortD Intialize
+void portD(void){
+        SYSCTL_RCGCGPIO_R |= 0x08;
+        while((SYSCTL_PRGPIO_R & 0x08) == 0){}
+        GPIO_PORTD_LOCK_R = 0x4C4F434B;
+        GPIO_PORTD_DEN_R |= 0x03;    // Digital Pin D0,D1
+        GPIO_PORTD_DIR_R |= 0x03;    // Digital outputD0,D1
+        GPIO_PORTD_AFSEL_R = 0x00000000;
+        GPIO_PORTD_AMSEL_R = 0x00000000;
+        GPIO_PORTD_PCTL_R = 0x00000000;
+        GPIO_PORTD_DATA_R = 0x00000000;
+}
+
 //PortC Intialize
 void portC(void){
         SYSCTL_RCGCGPIO_R |= 0x04;
@@ -30,6 +58,18 @@ void portC(void){
         GPIO_PORTC_AMSEL_R = 0x00;
         GPIO_PORTC_PCTL_R = 0x00000000;
         GPIO_PORTC_DATA_R = 0x00;
+}
+
+//PortB Intialize
+void portB(void){
+        SYSCTL_RCGCGPIO_R |= 0x02;
+        while((SYSCTL_PRGPIO_R & 0x02) == 0){}
+        GPIO_PORTB_DEN_R = 0xFF; //for LCD
+        GPIO_PORTB_DIR_R = 0xFF;
+        GPIO_PORTB_AFSEL_R = 0x00;
+        GPIO_PORTB_AMSEL_R = 0x00;
+        GPIO_PORTB_PCTL_R = 0x00000000;
+        GPIO_PORTB_DATA_R = 0x00;
 }
 
 //PortA Initialize
