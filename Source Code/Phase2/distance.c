@@ -25,3 +25,28 @@ double calculate_distance(double pre_lati, double pre_longi,double lati, double 
 
         return d;
 }
+
+//----------------------------------------------------------------------------
+
+//Update Distance
+void update_dist_travelled(void){
+	double d;
+	if(previous_lat==0 || previous_long==0){
+		previous_lat = current_lat;
+		previous_long = current_long;
+	}
+
+	if (current_lat ==0 || current_long ==0){
+		return;
+	}
+
+	if (((previous_lat != current_lat) | (previous_long != current_long))&( (speed < 4)&(speed >0.4) & (fabs(normalized_speed) < 1.2))){
+		d = calculate_distance(previous_lat,previous_long,current_lat,current_long);
+    		dist_travelled += d;
+		update_remaining_distance();
+    		previous_lat = current_lat;
+    		previous_long = current_long;
+	}
+}
+
+//-------------------------------------------------------------------------
