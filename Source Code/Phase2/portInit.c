@@ -2,6 +2,7 @@
 //---------------------------------------------------------------------------
 void portF(void);
 void portA(void);
+void portC(void);
 //--------------------------------------------------------------------------
                         //Function Definition
 
@@ -17,6 +18,18 @@ void portF(void){
         GPIO_PORTF_AFSEL_R &= ~0x0E;                    // Alternative function or General Purpose Selection; here we selected GPIO
         GPIO_PORTF_PCTL_R &= ~0x0000FFF0;               // Definition of the alternative function of the pin; here we clear the leds pins
         GPIO_PORTF_DATA_R &= ~0x0E;                     // clear data from LEDs.
+}
+
+//PortC Intialize
+void portC(void){
+        SYSCTL_RCGCGPIO_R |= 0x04;
+        while((SYSCTL_PRGPIO_R & 0x04) == 0){}
+        GPIO_PORTC_DEN_R = 0x00;
+        GPIO_PORTC_DIR_R = 0x00;
+        GPIO_PORTC_AFSEL_R = 0x00;
+        GPIO_PORTC_AMSEL_R = 0x00;
+        GPIO_PORTC_PCTL_R = 0x00000000;
+        GPIO_PORTC_DATA_R = 0x00;
 }
 
 //PortA Initialize
