@@ -1,6 +1,26 @@
+ //Global Variables to be used
 
+double dist_travelled = 0;
+double old_dist = 0;
+char dist_buffer[16];
+double PI = 3.1415926535 ;
+double current_lat=0;
+double current_long=0;
+double previous_lat=0;
+double previous_long=0;
+double speed=0;
+double dst_lat = 30.037226628381287;
+double dst_long = 31.239754653238634;
+double remaining_dst;
+int reached = 0;
+int speed_hist_counter=0;
+int speed_hist_norm_counter=0;
+char location_buffer[128]; // buffer to format the output variable in
+char location_buffer1[128]; // buffer to format the output variable in
+char lat_long_hist[5];
+//-------------------------------------------------------------
 
-
+//-------------------------------------------------------------
 
 //Distance calculate function this function is called haversine function
 // the error is up to 0.5% because it consider the earth as perfect sphere
