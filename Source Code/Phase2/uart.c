@@ -11,6 +11,9 @@ void UART3_Init(void);
 unsigned char UART3_Available(void);
 unsigned char UART3_Read(void);
 void UART3_Write(unsigned char data);
+void UART3_ReadString(char *str, char startCh ,char stopCh ,int shift);
+void UART3_readString(char *str, char startCh , char stopCh);
+void UART3_WriteString(char *str);
 //-------------------------------------------------------------------------------
 				//UART Initialize
 //-------------------------------------------------------------------------------
@@ -106,3 +109,50 @@ void UART3_Write(unsigned char data){
         while((UART3_FR_R & UART_FR_TXFF) != 0);
         UART3_DR_R = data;
 }
+
+//UART3 Write String
+void UART3_WriteString(char *str){                              //Write String
+	while(*str){
+      		UART3_Write(*str);
+    		str++;
+  	}
+}
+
+//UART3 Read String
+void UART3_ReadString(char *str, char startCh ,char stopCh ,int shift){      //Read String
+	int i;
+	int cond = 0;
+	char c = UART3_Read();
+		
+    	if (c == startCh){
+		i=-2;
+    		while(c && i < shift){
+        		*str = c;
+        		str++;
+        		c = UART3_Read();
+
+			if (c == stopCh){
+				cond = 1;
+			}
+
+			if (cond){
+				i++;
+			}
+    		}
+    	}
+    	*str = 0x00;
+}
+
+//UART3 Read String
+void UART3_readString(char *str, char startCh , char stopCh){      //Read String
+    char c = UART3_Read();
+    if (c == startCh){
+    	while(c && c != stopCh){
+        	*str = c;
+        	str++;
+        	c = UART3_Read();
+    	}
+    }
+    *str = 0x00;
+}
+//-------------------------------------------------------------------------
