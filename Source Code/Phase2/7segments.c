@@ -78,7 +78,7 @@ void light_led_after_100m(void){
 void light_led_at_distance(void){
 	double till_point;
 	till_point = calculate_distance(current_lat,current_long,dst_lat,dst_long);
-    	if(till_point<=15){
+    	if(till_point<=20){
         	red_led_output(); //led red o/p function
     	}
 }
