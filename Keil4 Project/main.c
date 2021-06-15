@@ -58,6 +58,7 @@ char apn[21] = "internet.vodafone.net";                    //APN
 char apn_u[1] = "";                     //APN-Username
 char apn_p[1] = "";                     //APN-Password
 char url[36] = "en558zika04rpsq.m.pipedream.net/gps";
+int ready_to_be_sent = 0;
 //---------------------------------------------------------------------------
                         //Function declaration
 //---------------------------------------------------------------------------
@@ -212,11 +213,15 @@ int main()
 				LCD_Print(location_buffer1,1);
 				update_7_segment();
 				light_led_at_distance();
-				if(time_minutes % 2 ==0 && time_seconds%30==0 && time_seconds!=0)
+				if (time_seconds % 30 !=0)
+				{
+					ready_to_be_sent=1;
+				}
+				if(ready_to_be_sent==1 && time_minutes % 2 ==0 && time_seconds%30==0 && time_seconds!=0)
 				{
 				snprintf(http_date_buffer, sizeof(http_date_buffer),"{\"sent_info\":\"%.6lf,%.6lf\"}",current_lat,current_long);
 				gsm_http_post(http_date_buffer);
-				delay_ms(2000);
+				ready_to_be_sent=0;
 				}
 			}
 }
@@ -953,6 +958,5 @@ void gsm_send_uart(char command[]) {
 	UART3_Write('\n');
 	UART0_WriteString(temp_arr);
 	UART0_Write('\n');
-	
-	delay_ms(3500);
+	delay_ms(1000);
 }
