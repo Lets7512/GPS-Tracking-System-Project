@@ -63,7 +63,6 @@ void send_dist_to_segment(void){
 void pinA3_High_output(void){
     GPIO_PORTA_DATA_R |= 0x08;
 }
-//Pin D0 = Low
 void pinA3_Low_output(void){
     GPIO_PORTA_DATA_R &= ~0x08;
 }
