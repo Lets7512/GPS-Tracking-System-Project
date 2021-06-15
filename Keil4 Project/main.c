@@ -952,11 +952,9 @@ void gsm_config_gprs(void){
   gsm_send_uart("AT+SAPBR=3,1,APN,internet.vodafone.net");
 }
 void gsm_send_uart(char command[]) {
-	char temp_arr[128];
-	strcpy(temp_arr,command);
-  UART3_WriteString(temp_arr);
+  UART3_WriteString(command);
 	UART3_Write('\n');
-	UART0_WriteString(temp_arr);
+	UART0_WriteString(command);
 	UART0_Write('\n');
-	delay_ms(1000);
+	delay_ms(5000);
 }
