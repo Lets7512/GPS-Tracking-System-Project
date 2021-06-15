@@ -956,5 +956,5 @@ void gsm_send_uart(char command[]) {
 	UART3_Write('\n');
 	UART0_WriteString(command);
 	UART0_Write('\n');
-	delay_ms(5000);
+	delay_ms(3500);
 }
