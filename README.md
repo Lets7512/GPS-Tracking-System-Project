@@ -5,7 +5,7 @@ In Phase 1,We implemented 4 functions:  </br>
 2- A function that turns on the LED when the distance exceeds 100 meters.</br>
 3- A function that will display the output distance on the 3-digit 7 segments and test it by writing on them a dummy data. </br>
 4- A function that calculates the total taken distance. </br>
-In Phase 21,We implemented 3 functionalities:  </br>
+In Phase 2,We implemented 3 functionalities:  </br>
 1- A function that initializes UART and enables us to communicate with GPS and Sim Modules.</br>
 2- Parsing the GPS info and extracting speed,time,latitude and longitude.
 3- Sending current latitude and current longitude to api on internet via sim module to use the info in mobile app or desktop application.
