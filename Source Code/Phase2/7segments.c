@@ -65,7 +65,7 @@ void pinA3_High_output(void){
 }
 //Pin D0 = Low
 void pinA3_Low_output(void){
-    GPIO_PORTA_DATA_R &= ~0x0C;
+    GPIO_PORTA_DATA_R &= ~0x08;
 }
 //Turn on LED after 100m
 void light_led_after_100m(void){
